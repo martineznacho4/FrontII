@@ -36,8 +36,14 @@ cambiarTema.addEventListener("click", alternarColorTema);
 function obtenerDatosDelUsuario() {
   /* --------------- PUNTO 1: Escribe tu codigo a partir de aqui --------------- */
  
-  datosPersona.nombre = prompt("Ingrese su nombre: ");
 
+  do {
+    datosPersona.nombre = prompt("Ingrese su nombre: ");
+    // console.log()
+    
+  } while (!datosPersona.nombre || !isNaN(datosPersona.nombre));
+
+  
   let fechaActual = new Date();
   let edad = prompt("Ingresa el año de tu nacimiento?");
   datosPersona.edad = fechaActual.getFullYear() - parseInt(edad);
