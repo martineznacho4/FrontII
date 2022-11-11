@@ -39,16 +39,21 @@ function obtenerDatosDelUsuario() {
 
   do {
     datosPersona.nombre = prompt("Ingrese su nombre: ");
-    // console.log()
-    
-  } while (!datosPersona.nombre || !isNaN(datosPersona.nombre));
+  } while (!datosPersona.nombre || !/^[A-Za-z\s]*$/.test(datosPersona.nombre));
 
   
   let fechaActual = new Date();
-  let edad = prompt("Ingresa el año de tu nacimiento?");
-  datosPersona.edad = fechaActual.getFullYear() - parseInt(edad);
+  while(true){
+    let edad = prompt("Ingresa el año de tu nacimiento?");
+    if( !isNaN(edad) && fechaActual.getFullYear() > parseInt(edad) && parseInt(edad) > 0){
+      datosPersona.edad = fechaActual.getFullYear() - parseInt(edad);
+      break
+    }
+  }
 
-  datosPersona.ciudad = prompt("En que ciudad vivis?");
+  do {
+    datosPersona.ciudad = prompt("En que ciudad vivis?");
+  } while (!datosPersona.ciudad);
   
   datosPersona.interesPorJs = confirm('Te interesa JavaScript?')
 
@@ -60,18 +65,18 @@ function renderizarDatosUsuario() {
   /* --------------- PUNTO 2: Escribe tu codigo a partir de aqui --------------- */
   
   let nombrePerfil = document.querySelector('#nombre');
-  nombrePerfil.innerHTML += `${datosPersona.nombre}`
+  nombrePerfil.innerHTML = `${datosPersona.nombre}`
 
   let edadPerfil = document.querySelector('#edad');
-  edadPerfil.innerHTML += `${datosPersona.edad}`
+  edadPerfil.innerHTML = `${datosPersona.edad}`
   
   let ciudadPerfil = document.querySelector('#ciudad');
-  ciudadPerfil.innerHTML += `${datosPersona.ciudad}`
+  ciudadPerfil.innerHTML = `${datosPersona.ciudad}`
   
   let interesJSPerfil = document.querySelector('#javascript');
   if(datosPersona.interesPorJs){
-    interesJSPerfil.innerHTML += 'Si'
-  }else{interesJSPerfil.innerHTML += 'No'}
+    interesJSPerfil.innerHTML = 'Si'
+  }else{interesJSPerfil.innerHTML = 'No'}
 
 }
 
@@ -93,12 +98,12 @@ function recorrerListadoYRenderizarTarjetas() {
     tarjeta.appendChild(imagenMateria)
 
     const lenguajesMateria = document.createElement('p')
-    lenguajesMateria.innerHTML += `Lenguajes: ${materia.lenguajes}`
+    lenguajesMateria.innerHTML = `Lenguajes: ${materia.lenguajes}`
     lenguajesMateria.classList.add('lenguajes')
     tarjeta.appendChild(lenguajesMateria)
 
     const bimestreMateria = document.createElement('p')
-    bimestreMateria.innerHTML += `Bimestre: ${materia.bimestre}`
+    bimestreMateria.innerHTML = `Bimestre: ${materia.bimestre}`
     lenguajesMateria.classList.add('bimestre')
     tarjeta.appendChild(bimestreMateria)
 
